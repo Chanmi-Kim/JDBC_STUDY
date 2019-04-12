@@ -1,0 +1,100 @@
+﻿
+메모장
+
+1. DB 재사용
+2. 업무 동일
+3. MVC 디자인 패턴 사용(******************************************************************)
+
+GoF 디자인 패턴 > 서적 
+
+MVC 디자인 패턴
+- 소프트웨어 개발 방법에서 사용되는 디자인 패턴은, 프로그램 개발에서 자주 나타나는 과제를 해결하기 위한 방법 중 하나로, 과거의 소프트웨어 개발 과정에서 발견된 설계의 노하우를 축적하여 이름을 붙여, 이후에 재이용하기 좋은 형태로 특정의 규약을 묶어서 정리한 것이다.
+- 모델-뷰-컨트롤러(Model–View–Controller, MVC)는 소프트웨어 공학에서 사용되는 소프트웨어 디자인 패턴이다.
+
+- 업무 코드를 성격에 맞게 분리시켜놓았음. > 관계 형성
+- M(Model) : Model 역할을 할 클래스들을 생성 x n개
+- V(View) : View 역할을 할 클래스들을 생성 x n개
+- C(Controller) : Controller 역할을 할 클래스들을 생성 x n개
+
+
+
+
+파일 생성
+1. MainController.java
+	- Controller 역할
+	- 전체 흐름을 제어하는 코드만 작성(출력 코드X, JDBC 코드X)
+	
+2. View.java
+	- View 역할
+	- 화면에 출력하는 코드만 작성(연산 코드X, 업무 코드X, JDBC 코드X)
+	
+3. IService.java
+	- Service 클래스의 부모 인터페이스
+4. Service.java
+	- 서비스 객체
+	- 업무 담당 객체
+	
+5. DAO.java
+	- Data Access Object
+	- 데이터 처리 객체
+	- 데이터 담당자
+	- 모든 데이터 처리와 관련된 코드를 작성
+		a. 파일 입출력 //BufferedReader, BufferedWriter
+		b. 네트워크 입출력
+		c. DB 입출력 //Connection, Statement, ResultSet
+
+6. DTO.java(VO.java)
+	- Data Transfer Object, Value Object
+	- 데이터 전달 객체
+	- 데이터 전달용 상자
+	- 보통 DB의 테이블(뷰) 1개당 DTO 1개(이상)가 만들어진다.
+
+
+
+
+------------------------------------------------------------------------
+
+1. 요구사항
+2. 화면설계
+3. ERD
+4. DB 설계(Script)
+5. 더미 데이터
+6. 업무 SQL 작성
+------------------------------
+7. 자바 프로젝트 기초 설계
+	- 각종 클래스 선언
+	- 이름 규칙(*****)
+	- 패키지??(역할 : 컨트롤러, 서비스, DTO, DAO)
+	- 패키지??(업무 : 학생, 교사, 관리자)
+	- com.test.student
+	- com.test.student.public
+	- com.test.student.private
+	- com.test.student.db.core
+	- com.test.student.db.sub
+	- com.test.student.io
+	- com.test.student.xx
+	
+	
+		a. 각종 컨트롤러
+			- 메인 컨트롤러 > MainController.java
+			- 서브 컨트롤러(각각의 업무 개수만큼)
+							> StudentController.java
+							> TeacherController.java
+							> AdministratorController.java
+		b. DTO
+			- 테이블 1개 > DTO 1개
+			- JOIN(View) > 새로운 DTO 1개
+			- 예측할 수 있는 것까지 > 구현하면서 추가해도 상관없음
+		c. DAO
+			- 업무별로 생성
+		d. View
+			- 1개 통합
+			- 업무별로 생성
+		e. Service(IService)
+			- 업무별로 생성
+
+8. 뼈대 코드 작성
+	- 업무 구현 제외하고 인터페이스만 구현 > 메뉴 + 선택 + 호출
+---------------------------------------------------------------- 공통 작업
+1/N 업무 분장 ~
+9. 개인 업무 구현
