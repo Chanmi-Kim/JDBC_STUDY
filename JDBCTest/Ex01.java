@@ -1,4 +1,4 @@
-package com.test.jdbc;
+﻿package com.test.jdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -120,21 +120,3 @@ public class Ex01 {
 	}//main
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
